@@ -1,0 +1,456 @@
+--------------------------------------------------------------------------------
+--> La función input()
+--------------------------------------------------------------------------------
+Ahora se introducirá una nueva función, la cual pareciese ser un reflejo de la función print().
+
+¿Por qué? Bueno, print() envía datos a la consola.
+
+Esta nueva función obtiene datos de ella.
+
+print() no tiene un resultado utilizable. La importancia de esta nueva función es que regresa 
+un valor muy utilizable.
+
+La función se llama input(). El nombre de la función lo dice todo.
+
+La función input() es capaz de leer datos que fueron introducidos por el usuario y pasar 
+esos datos al programa en ejecución.
+
+El programa entonces puede manipular los datos, haciendo que el código sea verdaderamente 
+interactivo.
+
+Todos los programas leen y procesan datos. Un programa que no obtiene datos de entrada del 
+usuario es un programa sordo.
+
+Observa el ejemplo:
+
+print("Dime lo que sea...")
+anything = input()
+print("Hmm...", anything, "... ¿en serio?")
+
+Nota:
+
+El programa solicita al usuario que inserte algún dato desde la consola (seguramente 
+utilizando el teclado, aunque también es posible introducir datos utilizando la voz o 
+alguna imagen);
+La función input() es invocada sin argumentos (es la manera mas sencilla de utilizar la 
+función); la función pondrá la consola en modo de entrada; aparecerá un cursor que parpadea, 
+y podrás introducir datos con el teclado, al terminar presiona la tecla Enter; todos los 
+datos introducidos serán enviados al programa a través del resultado de la función;
+Nota: el resultado debe ser asignado a una variable; esto es crucial, si no se hace los 
+datos introducidos se perderán;
+Después se utiliza la función print() para mostrar los datos que se obtuvieron, con algunas 
+observaciones adicionales.
+
+anything = input("Dime lo que sea...")
+print("Hmm...", anything, "...¿en serio?")
+
+Nota:
+
+la función input() se invoca con un argumento: es una cadena que contiene un mensaje;
+el mensaje se mostrará en la consola antes de que el usuario tenga la oportunidad de ingresar algo;
+input() entonces hará su trabajo.
+Esta variante de la invocación de input() simplifica el código y lo hace más claro.
+
+--------------------------------------------------------------------------------
+--> El resultado de la función input()
+--------------------------------------------------------------------------------
+Se ha dicho antes, pero hay que decirlo sin ambigüedades una vez más: el resultado 
+de la función input() es una cadena.
+
+Una cadena que contiene todos los caracteres que el usuario introduce desde el teclado. 
+No es un entero ni un flotante.
+
+Esto significa que no se debe utilizar como un argumento para operaciones matemáticas, 
+por ejemplo, no se pueden utilizar estos datos para elevarlos al cuadrado, para dividirlos 
+entre algo o por algo.
+
+
+anything = input("Ingresa un número:")
+something = anything ** 2.0
+print(anything, "al cuadrado es", something)
+ Traceback (most recent call last):
+File ".main.py", line 4, in <module>
+something = anything ** 2.0
+TypeError: unsupported operand type(s) for ** or pow(): 'str' and 'float'
+
+La última línea lo explica todo, se intentó aplicar el operador ** a 'str' 
+(una cadena) acompañado por un 'float'.
+
+Esto está prohibido.
+
+Esto debe de ser obvio. ¿Puedes predecir el valor de "ser o no ser" elevado a la potencia 2?
+
+No podemos. Python tampoco puede.
+
+¿Habremos llegado a un punto muerto? ¿Existirá alguna solución? Claro que la hay.
+--------------------------------------------------------------------------------
+--> Conversión de tipos (conversiones de tipos)
+--------------------------------------------------------------------------------
+Python ofrece dos simples funciones para especificar un tipo de dato y resolver este problema, 
+aquí están: int() y float().
+
+Sus nombres indican cual es su función:
+
+La función int() toma un argumento (por ejemplo, una cadena: int(string)) e intenta convertirlo 
+a un valor entero; si llegase a fallar, el programa entero fallará también (existe una manera 
+de solucionar esto, se explicará mas adelante);
+La función float() toma un argumento (por ejemplo, una cadena: float(string)) e intenta 
+convertirlo a flotante (el resto es lo mismo).
+Esto es muy simple y muy efectivo. Sin embargo, estas funciones se pueden invocar directamente 
+pasando el resultado de la función input() directamente. No hay necesidad de emplear variables 
+como almacenamiento intermedio.
+
+Se ha implementado esta idea en el editor - observa el código.
+
+¿Puedes imaginar como la cadena introducida por el usuario fluye desde la función input() 
+hacía la función print()?
+
+Intenta ejecutar el código modificado. No olvides introducir un número valido.
+
+Prueba con diferentes valores, pequeños, grandes, negativos y positivos. El cero también 
+es un buen valor a introducir.
+
+Ejemplo: 
+
+anything = float(input("Ingresa un número: "))
+something = anything ** 2.0
+print(anything, "a la potencia de 2 es", something)
+--------------------------------------------------------------------------------
+--> Más sobre input() y conversión de tipo
+--------------------------------------------------------------------------------
+El tener un equipo compuesto por input()-int()-float() abre muchas nuevas posibilidades.
+
+Eventualmente serás capaz de escribir programas completos, los cuales acepten datos en forma 
+de números, los cuales serán procesados y se mostrarán los resultados.
+
+Por supuesto, estos programas serán muy primitivos y no muy utilizables, debido a que no pueden 
+tomar decisiones, y consecuentemente no son capaces de reaccionar acorde a cada situación.
+
+Sin embargo, esto no es un problema; se explicará como solucionarlo pronto.
+
+El siguiente ejemplo hace referencia al programa anterior que calcula la longitud de la hipotenusa. 
+Vamos a reescribirlo, para que pueda leer las longitudes de los catetos desde la consola.
+
+Revisa la ventana del editor - así es como se ve ahora:
+
+
+Ejemplo: 
+
+leg_a = float(input("Ingresa la longitud del primer cateto: "))
+leg_b = float(input("Ingresa la longitud del segundo cateto: "))
+hypo = (leg_a**2 + leg_b**2) ** .5
+print("La longitud de la hipotenusa es:", hypo)
+
+Resultado:
+
+Ingresa la longitud del primer cateto: 4
+Ingresa la longitud del segundo cateto: 5
+La longitud de la hipotenusa es: 6.4031242374328485
+
+
+Ejemplo 2 pero no se crea una variable para guardar los resultados, la operación se hace en el mismo print:
+
+leg_a = float(input("Ingresa la longitud del primer cateto: "))
+leg_b = float(input("Ingresa la longitud del segundo cateto: "))
+print("La longitud de la hipotenusa es:", (leg_a**2 + leg_b**2) ** .5)
+--------------------------------------------------------------------------------
+--> Operadores cadena
+--------------------------------------------------------------------------------
+Es tiempo de regresar a estos dos operadores aritméticos: + y *.
+
+Ambos tienen una función secundaría. Son capaces de hacer algo más que sumar y multiplicar.
+
+Los hemos visto en acción cuando sus argumentos son (flotantes o enteros, no hay diferencia).
+
+Ahora veremos que son capaces también de manejar o manipular cadenas, aunque, en una manera muy específica.
+
+El signo de + (más), al ser aplicado a dos cadenas, se convierte en un operador de concatenación:
+
+
+string + string
+
+Simplemente concatena (junta) dos cadenas en una. Por supuesto, puede ser utilizado 
+más de una vez en una misma expresión, y en tal contexto se comporta con enlazado 
+del lado izquierdo.
+
+En contraste con el operador aritmético, el operador de concatenación no es conmutativo, 
+por ejemplo, "ab" + "ba" no es lo mismo que "ba" + "ab".
+
+No olvides, si se desea que el signo + sea un concatenador, no un sumador, solo se debe 
+asegurar que ambos argumentos sean cadenas.
+
+No se pueden mezclar los tipos de datos aquí.
+
+Ejemplo: 
+
+fnam = input("¿Me puedes dar tu nombre por favor? ")
+lnam = input("¿Me puedes dar tu apellido por favor? ")
+print("Gracias. ")
+print("\nTu nombre es " + fnam + " " + lnam + ".")
+
+Resultado:
+
+¿Me puedes dar tu apellido por favor? Hidalgo
+Gracias. 
+
+Tu nombre es Paul Hidalgo.
+
+Nota: el usar + para concatenar cadenas te permite construir la salida de una 
+manera más precisa que con una función print() pura, incluso si está enriquecida 
+con end= y sep= argumentos de palabras clave.
+
+
+--------------------------------------------------------------------------------
+--> Replicación
+--------------------------------------------------------------------------------
+El signo de * (asterisco), cuando es aplicado a una cadena y a un número (o a un número y cadena) se convierte en un operador de replicación:
+
+
+string * number
+number * string
+ 
+Replica la cadena el numero de veces indicado por el número.
+
+Por ejemplo:
+
+"James" *3 		produce 	"JamesJamesJames"
+3 * "an" 		produce 	"ananan"
+5 * "2" (o "2" * 5) 	produce 	"22222" (no 10!)
+
+print("+" + 10 * "-" + "+") #Multiplica los "-"
+print(("|" + " " * 10 + "|\n") * 5,end="") #Multiplica los " " y luego multiplica *5 todo y con el end="" trae la linea de abajo
+print("+" + 10 * "-" + "+") #Multiplica el "-" *10
+
+Resultado:
++----------+
+|          |
+|          |
+|          |
+|          |
+|          |
++----------+
+
+--------------------------------------------------------------------------------
+--> Conversiones de tipos una vez más: str()
+--------------------------------------------------------------------------------
+
+A estas alturas ya sabes como emplear las funciones int() y float() para convertir 
+una cadena a un número.
+
+Este tipo de conversión no es en un solo sentido. También se puede convertir un 
+numero a una cadena, lo cual es más fácil y seguro - esta operación es posible 
+hacerla siempre.
+
+Una función capaz de hacer esto se llama str():
+
+
+str(number)
+
+En resumen, la función str() en Python sirve para convertir cualquier tipo de
+dato en una cadena de caracteres, lo que nos permite trabajar con ellos de forma más versátil.
+
+--------------------------------------------------------------------------------
+--> Entradas y salidas simples
+--------------------------------------------------------------------------------
+-->Calculadora Simple
+
+Escenario
+Tu tarea es completar el código para evaluar los resultados de cuatro operaciones aritméticas básicas.
+
+Los resultados deben imprimirse en la consola.
+
+Es posible que no puedas proteger el código de un usuario que quiera dividir entre cero. 
+Está bien, no te preocupes por eso por ahora.
+
+Prueba tu código - ¿produce los resultados esperados?
+
+No te mostraremos ningún dato de prueba - eso sería demasiado simple.
+
+a = float(input("Ingresa el primer valor: "))
+b = float(input("Ingresa el segundo valor: "))
+print("Suma:", a + b)
+print("Resta:", a - b)
+print("Multiplicación:", a * b)
+print("División:", a / b)
+print("\n¡Eso es todo, amigos!")
+--------------------------------------------------------------------------------
+--> LAB Operadores y expresiones
+--------------------------------------------------------------------------------
+
+x = float(input("Ingresa el valor para x: "))
+y = 1./(x + 1./(x + 1./(x + 1./x)))
+print("y =", y)
+
+1 y el resultado debe ser 0.6000000000000001
+10 y el resultado debe ser 0.09901951266867294
+100 y el resultado debe ser 0.009999000199950014
+-5 y el resultado debe ser = -0.19258202567760344
+--------------------------------------------------------------------------------
+--> LAB Operadores y expresiones – 2
+--------------------------------------------------------------------------------
+La tarea es preparar un código simple para evaluar o encontrar el tiempo final de 
+un periodo de tiempo dado, expresándolo en horas y minutos. La hora de inicio se 
+da como un par de horas (0..23) y minutos (0..59). El resultado debe ser mostrado 
+en la consola.
+
+Por ejemplo, si el evento comienza a las 12:17 y dura 59 minutos, terminará a las 13:16.
+
+No te preocupes si tu código no es perfecto - está bien si acepta una hora invalida - 
+lo más importante es que el código produzca una salida correcta acorde a la entrada dada.
+
+Prueba el código cuidadosamente. Pista: utilizar el operador % puede ser clave para el éxito.
+-------------------------------------------------
+CODIGO:						|
+-------------------------------------------------
+hour = int(input("Hora de inicio (horas): "))
+mins = int(input("Minuto de inicio (minutos): "))
+dura = int(input("Duración del evento (minutos): "))
+mins = mins + dura # encuentra el número total de minutos
+hour = hour + mins // 60 # encuentra el número de horas ocultas en los minutos y actualiza las horas
+mins = mins % 60 # corrige los minutos para que estén en un rango de (0..59)
+hour = hour % 24 # corrige las horas para que estén en un rango de (0..23) 
+print(hour, ":", mins, sep='')
+
+-------------------------------------------------
+SALIDA:					|
+-------------------------------------------------
+Hora de inicio (horas): 13
+Minuto de inicio (minutos): 50
+Duración del evento (minutos): 20
+14:10
+--------------------------------------------------------------------------------
+--> RESUMEN DE SECCIÓN
+--------------------------------------------------------------------------------
+1. La función print() envía datos a la consola, mientras que la función input() obtiene datos de la consola.
+
+2. La función input() viene con un parámetro opcional: la cadena de mensaje. 
+Te permite escribir un mensaje antes de que el usuario ingrese algo, por ejemplo:
+
+
+name = input("Ingresa tu nombre: ")
+print("Hola, " + name + ". ¡Un gusto conocerte!")
+ 
+3. Cuando la función input() es llamada o invocada, el flujo del programa se detiene, 
+el símbolo del cursor se mantiene parpadeando (le está indicando al usuario que tome 
+acción ya que la consola está en modo de entrada) hasta que el usuario haya ingresado 
+un dato y/o haya presionado la tecla Enter.
+
+  NOTA  
+Puedes probar la funcionalidad completa de la función input() localmente en tu máquina. 
+Por razones de optimización, se ha limitado el máximo número de ejecuciones en Edube a 
+solo algunos segundos únicamente. Ve a Sandbox, copia-pega el código que está arriba, 
+ejecuta el programa, y espera unos segundos. Tu programa debe detenerse después de unos 
+segundos. Ahora abre IDLE, y ejecuta el mismo programa ahí -¿Puedes notar alguna diferencia?
+
+Tip: la característica mencionada anteriormente de la función input() puede ser utilizada 
+para pedirle al usuario que termine o finalice el programa. Observa el siguiente código:
+
+
+name = input("Ingresa tu nombre: ")
+print("Hola, " + name + ". '¡Gusto en conocerte'!")
+ 
+print("\nPresiona Enter para terminar el programa.")
+input()
+print("FIN.")
+ 
+4. El resultado de la función input() es una cadena. Se pueden unir cadenas unas con 
+otras a través del operador de concatenación (+). Observa el siguiente código:
+
+
+num_1 = input("Ingresa el primer número: ") # Ingresa 12
+num_2 = input("Ingresa el segundo número: ") # Ingresa 21
+ 
+print(num_1 + num_2) # El programa retorna 1221
+ 
+5. También se pueden multiplicar (* - replicación) cadenas, por ejemplo:
+
+
+my_input = input("Ingresa algo: ") # Entrada de ejemplo: hola
+print(my_input * 3) # Salida Esperada: holahola
+
+Preguntas:
+-----------------------------------------------------------------------
+Pregunta 1: ¿Cuál es el resultado del siguiente fragmento?
+-----------------------------------------------------------------------
+
+x = int(input("Ingresa un número: ")) # El usuario ingresa un 2
+print(x * "5")
+
+Salida: 55
+-----------------------------------------------------------------------
+Pregunta 2: ¿Cuál es el resultado esperado del siguiente fragmento?
+-----------------------------------------------------------------------
+
+x = input("Ingresa un número: ") # El usuario ingresa un 2
+print(type(x))
+
+Salida: <class 'str'>
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--> 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
